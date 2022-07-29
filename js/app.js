@@ -1,21 +1,24 @@
-// variables
-const email = document.querySelector('#email');
-const asunto = document.querySelector('#asunto');
-const mensaje = document.querySelector('#mensaje');
 
-const btnEnviar = document.querySelector('#enviar');
-const formularioEnviar = document.querySelector('#enviar-mail');
+/** validación de formulario 1 */
+
+/** Variables */
+/** variables para campos */
+const email = document.querySelector("#email");
+const asunto = document.querySelector("#asunto");
+const mensaje = document.querySelector("#mensaje");
+
+const btnEnviar = document.querySelector("#enviar");
 const resetBtn = document.querySelector('#resetBtn');
+const formularioEnviar = document.querySelector('#enviar-email');
 
-// event Listener
-
+/** eventos */
 eventListeners();
-
-function eventListeners() {
-     // Inicio de la aplicación y deshabilitar submit
-     document.addEventListener('DOMContentLoaded', inicioApp);
-
-     // Campos del formulario
+const eventListeners = () => {
+     
+     // Inicia la aplicación y deshabilita submit
+     document.addEventListener('DOMContentLoaded', iniciarApp);
+     
+     // campos del formulario
      email.addEventListener('blur', validarFormulario);
      asunto.addEventListener('blur', validarFormulario);
      mensaje.addEventListener('blur', validarFormulario);
@@ -25,21 +28,20 @@ function eventListeners() {
 
      // Boton de reset
      resetBtn.addEventListener('click', resetFormulario);
-}
+};
 
 
-
-// funciones
-function inicioApp() {
-     // deshabilitar el envio
+/** funciones */
+const iniciarApp = () => {
+     // console.log("iniciando");
      btnEnviar.disabled = true;
-     btnEnviar.classList.add('cursor-not-allowed', 'opacity-50')
+     btnEnviar.classList.add('cursor-not-allowed', 'opacity-50');
 }
+
 
 
 // Valida que el campo tengo algo escrito
-
-function validarFormulario(e) {
+const validarFormulario = (e) => {
     
      if(e.target.value.length > 0 ) {
           campo.style.borderBottomColor = 'green';
@@ -48,13 +50,10 @@ function validarFormulario(e) {
           e.target.classList.add('border', 'border-red-500');
      }
 
-
-
      // Validar unicamente el email
      if(this.type === 'email') {
           validarEmail(this);
      }
-
 
      if(email.value !== '' && asunto.value !== '' && mensaje.value !== '' ) {
         btnEnviar.disabled = false;
@@ -64,16 +63,15 @@ function validarFormulario(e) {
 }
 
 // Resetear el formulario 
-function resetFormulario(e) {
+const resetFormulario = (e) => {
      formularioEnviar.reset();
      e.preventDefault();
 }
 
 // Cuando se envia el correo
-function enviarEmail(e) {
+const enviarEmail = (e) => {
 
-    e.preventDefault();
-
+     e.preventDefault();
 
      // Spinner al presionar Enviar
      const spinner = document.querySelector('#spinner');
@@ -94,14 +92,10 @@ function enviarEmail(e) {
                enviado.remove();
                formularioEnviar.reset();
           }, 5000);
-     }, 3000);
-
-     
+     }, 3000);     
 }
 
-
-
-function validarEmail(campo) {
+const validarEmail = (campo) => {
      const mensaje = campo.value;
 
      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
